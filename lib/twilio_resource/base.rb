@@ -1,5 +1,20 @@
 # Encapsulates the changes that need to be made to active_resource's
-# defaults in order to communicate with Twilio.
+# defaults in order to communicate with Twilio. There are a few main
+# issues with ActiveResource's defaults:
+#
+# 1. Twilio's urls don't take an extension. ActiveResource requires
+#    endpoints to have an extension corresponding to the type of data,
+#    for example: +resource.xml+ or +resource.json+. Twilio's are
+#    always xml, but have no extension.
+# 
+# 2. Twilio uses capitalized names in their URLs. For instance,
+#    instead of '/account/1/calls/1', they use '/Account/1/Calls/1'.
+# 
+# 3. Twilio takes form encoded params, like token=blah&sid=foo, but
+#    returns data in XML. These changes are encapsulated in
+#    ActiveResource::Formats::TwilioFormat.
+# 
+# All of the Twilio ActiveResource classes inherit from this class.
 class TwilioResource::Base < ActiveResource::Base
 
   class << self

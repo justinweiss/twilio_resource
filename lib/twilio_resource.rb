@@ -10,6 +10,8 @@ module TwilioResource
     attr_accessor :logger
   end
 
+  # Sets up the credentials the ActiveResources will use to access the
+  # twilio API. Optionally takes a +logger+, which defaults to +STDOUT+.
   def self.setup(sid, token, logger = nil)
     @logger = logger || Logger.new(STDOUT) 
     TwilioResource::Base.sid = sid
