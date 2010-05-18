@@ -1,8 +1,9 @@
 module TwilioResource
 end
 
-# Wraps Twilio exceptions with a ruby exception class. Currently only
-# supports Error 21452 - No Phone Numbers Found.
+# Wraps Twilio exceptions with a ruby exception class. Currently supports:
+#   
+#    - Error 21452 - No Phone Numbers Found
 class TwilioResource::Exception < StandardError
 
   # Given a twilio error xml response, returns the corresponding
@@ -22,7 +23,7 @@ class TwilioResource::Exception < StandardError
     end
   end
   
-  # Maps error codes to exception classes.
+  # Hash mapping error codes to exception classes.
   def self.twilio_exceptions
     {
       21452 => TwilioResource::NoPhoneNumbersFoundException,

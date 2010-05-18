@@ -59,6 +59,13 @@ class TwilioResource::Base < ActiveResource::Base
     super.camelize
   end
 
+  def self.query_string(params)
+    # camelize all the param keys, because that's what Twilio expects
+    fixed_params_list = params.map {|k, v| [k.to_s.camelize, v]}.flatten
+    fixed_params_hash = Hash[*fixed_params_list] # Hash really needs a decent #map
+    super(fixed_params_hash)
+  end
+
   # we should wrap the exceptions we can
   def save(*params)
     begin
