@@ -19,12 +19,12 @@ models that are already built.
 
 
 Supported Functionality
------------------------
+=======================
 - Requesting, listing, and deleting new local and toll-free numbers
 - Placing and listing calls made to a phone number
 
 Todo
-====
+----
 - Conference resource
 - Redirecting calls
 - Support data returned in xml attributes
@@ -34,7 +34,7 @@ Todo
 - Add documentation on supported attributes to the ActiveResource models
 
 Setup
------
+=====
 
 Before you start using TwilioResource, you have to give it your Twilio
 login credentials. You can do this in your Rails initializer:
@@ -43,7 +43,7 @@ login credentials. You can do this in your Rails initializer:
     TwilioResource.setup('token', 'sid')
 
 Examples
---------
+========
 
 Requesting a new phone number:
 
