@@ -10,12 +10,9 @@ class TwilioResource::Exception < StandardError
   # exception if it is mapped, or the xml response otherwise.
   def self.find_exception(e)
     new_exception = if e.respond_to?(:response)
-      exception_data = Hash.from_xml(e.response.body)
+      exception_data = ActiveResource::Formats::TwilioFormat.decode(e.response.body)
 
-      
-      code = exception_data['twilio_response'] && 
-          exception_data['twilio_response']['rest_exception'] && 
-          exception_data['twilio_response']['rest_exception']['code']
+      code = exception_data['code']
       exception_klass = twilio_exceptions[code.to_i] if code
       exception_klass.nil? ? e : exception_klass.new
     else

@@ -11,6 +11,12 @@ class TwilioResource::CallTest < Test::Unit::TestCase
   def test_find_all
     calls = TwilioResource::Call.find(:all, :params => {:account_id => 1})
     assert_equal 2, calls.length
+    
+    # check attributes were assigned correctly
+    call = calls.first
+    assert_equal('4159633717', call.called)
+    assert_equal('4156767925', call.caller)
+    assert(call.call_segment_sid.blank?)
   end
 
   # what the hell, twilio? who uses capitalization to distinguish
