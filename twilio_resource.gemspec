@@ -2,7 +2,7 @@ spec = Gem::Specification.new do |s|
   s.name = 'twilio_resource'
   s.version = '0.1.1'
   s.summary = 'An ActiveResource API wrapper for Twilio'
-  s.add_dependency "activeresource", '>= 2.3.2'
+  s.add_dependency "reactive_resource", '~> 0.5.1'
   s.author = "Justin Weiss"
   s.email = "justin@uberweiss.org"
   s.homepage = "http://github.com/justinweiss/twilio_resource"

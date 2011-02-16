@@ -22,10 +22,18 @@ class TwilioMock
 
   end
 
+  def self.build_header(method)
+    if ActiveResource::VERSION::MAJOR == 3
+      TwilioResource::Account.connection.send(:build_request_headers, {}, method, '')
+    else
+      TwilioResource::Account.connection.send(:build_request_headers, {})
+    end
+  end
+  
   def self.auth_delete(account_id)
     old_account_id = TwilioResource::Base.user
     TwilioResource::Base.user = account_id
-    auth = TwilioResource::Account.connection.send(:build_request_headers, {}, :delete)
+    auth = build_header(:delete)
     TwilioResource::Base.user = old_account_id
     auth
   end
@@ -33,7 +41,7 @@ class TwilioMock
   def self.auth_post(account_id)
     old_account_id = TwilioResource::Base.user
     TwilioResource::Base.user = account_id
-    auth = TwilioResource::Account.connection.send(:build_request_headers, {}, :post)
+    auth = build_header(:post)
     TwilioResource::Base.user = old_account_id
     auth
   end
@@ -41,7 +49,7 @@ class TwilioMock
   def self.auth_get(account_id)
     old_account_id = TwilioResource::Base.user
     TwilioResource::Base.user = account_id
-    auth = TwilioResource::Account.connection.send(:build_request_headers, {}, :get)
+    auth = build_header(:get)
     TwilioResource::Base.user = old_account_id
     auth
   end

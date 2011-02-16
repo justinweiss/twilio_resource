@@ -1,10 +1,17 @@
 require 'logger'
-require 'activeresource'
+require 'reactive_resource'
 
 require 'twilio_resource/twilio_format'
 require 'twilio_resource/exceptions'
 
 module TwilioResource
+
+  autoload :Base, 'twilio_resource/base'
+  autoload :Account, 'twilio_resource/account'
+  autoload :Call, 'twilio_resource/call'
+  autoload :IncomingPhoneNumber, 'twilio_resource/incoming_phone_number'
+  autoload :LocalIncomingPhoneNumber, 'twilio_resource/local_incoming_phone_number'
+  autoload :TollFreeIncomingPhoneNumber, 'twilio_resource/toll_free_incoming_phone_number'
   
   class << self
     attr_accessor :logger
@@ -18,10 +25,3 @@ module TwilioResource
     TwilioResource::Base.token = token
   end
 end
-
-require 'twilio_resource/base'
-require 'twilio_resource/account'
-require 'twilio_resource/call'
-require 'twilio_resource/incoming_phone_number'
-require 'twilio_resource/local_incoming_phone_number'
-require 'twilio_resource/toll_free_incoming_phone_number'

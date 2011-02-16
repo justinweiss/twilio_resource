@@ -3,7 +3,7 @@
 # - http://www.twilio.com/docs/api/2008-08-01/rest/call
 # - http://www.twilio.com/docs/api/2008-08-01/rest/making_calls
 class TwilioResource::Call < TwilioResource::Base
-  self.prefix = superclass.prefix_source + 'Accounts/:account_id/'
+  belongs_to :account
 
   NOT_DIALED = 0
   IN_PROGRESS = 1

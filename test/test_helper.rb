@@ -1,6 +1,6 @@
 require 'test/unit'
 require 'rubygems'
-require 'activeresource'
+require 'reactive_resource'
 require 'twilio_resource'
 
 TwilioResource.setup('1', '1')
