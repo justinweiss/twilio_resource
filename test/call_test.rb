@@ -14,8 +14,10 @@ class TwilioResource::CallTest < Test::Unit::TestCase
     
     # check attributes were assigned correctly
     call = calls.first
-    assert_equal('4159633717', call.called)
-    assert_equal('4156767925', call.caller)
+    assert_equal('+15304551166', call.called)
+    assert_equal('+15304551166', call.to)
+    assert_equal('+15105555555', call.caller)
+    assert_equal('+15105555555', call.from)
     assert(call.call_segment_sid.blank?)
   end
 

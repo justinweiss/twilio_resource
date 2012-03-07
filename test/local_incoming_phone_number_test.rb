@@ -5,7 +5,13 @@ class TwilioResource::LocalIncomingPhoneNumberTest < Test::Unit::TestCase
 
   def setup
     super
+    @old_user = TwilioResource::Base.user
     TwilioMock.setup_remote_fixtures
+  end
+
+  def teardown
+    TwilioResource::Base.user = @old_user
+    super
   end
   
   def test_provision_local_number
@@ -14,7 +20,7 @@ class TwilioResource::LocalIncomingPhoneNumberTest < Test::Unit::TestCase
                                                  :method => 'POST',
                                                  :friendly_name => "My Local Number",
                                                  :account_id => 1)
-    assert_equal "AreaCode=206&FriendlyName=My+Local+Number&Method=POST&Url=http%3A%2F%2Fexample.com%2Fcalls", phone.encode
+    assert_equal "AccountId=1&AreaCode=206&FriendlyName=My+Local+Number&Method=POST&Url=http%3A%2F%2Fexample.com%2Fcalls", phone.encode
     phone.save
 
     assert_equal '2064567890', phone.phone_number
@@ -27,11 +33,10 @@ class TwilioResource::LocalIncomingPhoneNumberTest < Test::Unit::TestCase
                                                  :method => 'POST',
                                                  :friendly_name => "My Local Number",
                                                  :account_id => TwilioResource::Base.user)
-    assert_equal "AreaCode=815&FriendlyName=My+Local+Number&Method=POST&Url=http%3A%2F%2Fexample.com%2Fcalls", phone.encode
+    assert_equal "AccountId=2&AreaCode=815&FriendlyName=My+Local+Number&Method=POST&Url=http%3A%2F%2Fexample.com%2Fcalls", phone.encode
     assert_raises TwilioResource::NoPhoneNumbersFoundException do 
       phone.save
     end
-
   end
 
   # test find, update

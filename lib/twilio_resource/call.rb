@@ -5,16 +5,27 @@
 class TwilioResource::Call < TwilioResource::Base
   belongs_to :account
 
-  NOT_DIALED = 0
-  IN_PROGRESS = 1
-  COMPLETE = 2
+  NOT_DIALED = "queued"
+  IN_PROGRESS = "in-progress"
+  COMPLETE = "completed"
+  RINGING = "ringing"
+  FAILED = "failed"
+  BUSY = "busy"
+  NO_ANSWER = "no-answer"
 
-  # Returns the status of the call. Can be
-  # TwilioResource::Call::NOT_DIALED,
-  # TwilioResource::Call::IN_PROGRESS, or
-  # TwilioResource::Call::COMPLETE
-  def status
-    attributes["status"].to_i if attributes["status"]
+  # old end-point
+  def called
+    self.to
   end
- 
+
+  # old end-point
+  def caller
+    self.from
+  end
+
+  # old end-point
+  def call_segment_sid
+    self.parent_call_sid
+  end
+
 end
