@@ -73,6 +73,6 @@ class TwilioResource::Base < ReactiveResource::Base
 
 
   self.site = "https://api.twilio.com"
-  self.prefix = '/2008-08-01/'
+  self.prefix = '/2010-04-01/'
   self.format = :twilio
 end
