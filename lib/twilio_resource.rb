@@ -12,6 +12,7 @@ module TwilioResource
   autoload :IncomingPhoneNumber, 'twilio_resource/incoming_phone_number'
   autoload :LocalIncomingPhoneNumber, 'twilio_resource/local_incoming_phone_number'
   autoload :TollFreeIncomingPhoneNumber, 'twilio_resource/toll_free_incoming_phone_number'
+  autoload :OutgoingCallerId, 'twilio_resource/outgoing_caller_id'
   
   class << self
     attr_accessor :logger
