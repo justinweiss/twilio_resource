@@ -1,7 +1,7 @@
 require 'active_resource/http_mock'
 
 class TwilioMock
-  
+
   def self.setup_remote_fixtures
     ActiveResource::HttpMock.respond_to do |mock|
       mock.get '/2010-04-01/Accounts/1', auth_get(1), main_account
@@ -10,7 +10,7 @@ class TwilioMock
       mock.post '/2010-04-01/Accounts/1/IncomingPhoneNumbers/TollFree', auth_post(1), toll_free_number_provision_success
 
       mock.get '/2010-04-01/Accounts/1/Calls', auth_get(1), all_calls
-      mock.get '/2010-04-01/Accounts/1/Calls?StartTime=2009-09-01', auth_get(1), recent_calls      
+      mock.get '/2010-04-01/Accounts/1/Calls?StartTime=2009-09-01', auth_get(1), recent_calls
       mock.get '/2010-04-01/Accounts/1/Calls?Status=completed', auth_get(1), succeeded_recent_calls
       mock.get '/2010-04-01/Accounts/1/Calls?StartTime=2009-09-01&Status=completed', auth_get(1), no_calls
 
@@ -25,13 +25,13 @@ class TwilioMock
   end
 
   def self.build_header(method)
-    if ActiveResource::VERSION::MAJOR == 3
+    if defined?(ActiveResource::VERSION) && ActiveResource::VERSION::MAJOR == 3
       TwilioResource::Account.connection.send(:build_request_headers, {}, method, '')
     else
       TwilioResource::Account.connection.send(:build_request_headers, {})
     end
   end
-  
+
   def self.auth_delete(account_id)
     old_account_id = TwilioResource::Base.user
     TwilioResource::Base.user = account_id
@@ -60,8 +60,8 @@ class TwilioMock
 <<END
 <TwilioResponse>
     <IncomingPhoneNumber>
-        <Sid>PNe536dfda7c6184afab78d980cb8cdf43</Sid> 
-        <AccountSid>AC35542fc30a091bed0c1ed511e1d9935d</AccountSid> 
+        <Sid>PNe536dfda7c6184afab78d980cb8cdf43</Sid>
+        <AccountSid>AC35542fc30a091bed0c1ed511e1d9935d</AccountSid>
         <FriendlyName>My Home Phone Number</FriendlyName>
         <PhoneNumber>4158675309</PhoneNumber>
         <VoiceUrl>http://mycompany.com/handleNewCall.php</VoiceUrl>
@@ -94,7 +94,7 @@ END
 <<END
 <TwilioResponse>
   <Account>
-    <Sid>AC309475e5fede1b49e100272a8640f438</Sid>  
+    <Sid>AC309475e5fede1b49e100272a8640f438</Sid>
     <FriendlyName>My Twilio Account</FriendlyName>
     <Type>Full</Type>
     <Status>active</Status>
@@ -127,10 +127,10 @@ END
 
   def self.all_calls
 <<END
-<TwilioResponse>  
-    <Calls page="0" numpages="1" pagesize="50" total="38" start="0" end="37">  
+<TwilioResponse>
+    <Calls page="0" numpages="1" pagesize="50" total="38" start="0" end="37">
         <Call>
-            <Sid>CA42ed11f93dc08b952027ffbc406d0868</Sid>  
+            <Sid>CA42ed11f93dc08b952027ffbc406d0868</Sid>
             <DateCreated>Fri, 13 Aug 2010 01:16:22 +0000</DateCreated>
             <DateUpdated>Fri, 13 Aug 2010 01:16:22 +0000</DateUpdated>
             <ParentCallSid/>
@@ -155,7 +155,7 @@ END
             </SubresourceUris>
         </Call>
         <Call>
-            <Sid>CA751e8fa0a0105cf26a0d7a9775fb4bfb</Sid>  
+            <Sid>CA751e8fa0a0105cf26a0d7a9775fb4bfb</Sid>
             <DateCreated>Fri, 13 Aug 2010 01:16:22 +0000</DateCreated>
             <DateUpdated>Fri, 13 Aug 2010 01:16:22 +0000</DateUpdated>
             <ParentCallSid/>
@@ -179,17 +179,17 @@ END
                 <Recordings>/2010-04-01/Accounts/AC5ef877a5fe4238be081ea6f3c44186f3/Calls/CA92d4405c9237c4ea04b56cbda88e128c/Recordings</Recordings>
             </SubresourceUris>
         </Call>
-    </Calls> 
-</TwilioResponse>  
+    </Calls>
+</TwilioResponse>
 END
   end
 
   def self.succeeded_calls
 <<END
-<TwilioResponse>  
-    <Calls page="0" numpages="1" pagesize="50" total="38" start="0" end="37">  
+<TwilioResponse>
+    <Calls page="0" numpages="1" pagesize="50" total="38" start="0" end="37">
         <Call>
-            <Sid>CA42ed11f93dc08b952027ffbc406d0868</Sid>  
+            <Sid>CA42ed11f93dc08b952027ffbc406d0868</Sid>
             <DateCreated>Sat, 07 Feb 2009 13:15:19 -0800</DateCreated>
             <DateUpdated>Sat, 07 Feb 2009 13:15:19 -0800</DateUpdated>
             <ParentCallSid/>
@@ -214,7 +214,7 @@ END
             </SubresourceUris>
         </Call>
         <Call>
-            <Sid>1000</Sid>  
+            <Sid>1000</Sid>
             <DateCreated>Sat, 07 Feb 2009 13:15:19 -0800</DateCreated>
             <DateUpdated>Sat, 07 Feb 2009 13:15:19 -0800</DateUpdated>
             <ParentCallSid/>
@@ -239,7 +239,7 @@ END
             </SubresourceUris>
         </Call>
         <Call>
-            <Sid>1001</Sid>  
+            <Sid>1001</Sid>
             <DateCreated>Sat, 07 Feb 2009 13:15:19 -0800</DateCreated>
             <DateUpdated>Sat, 07 Feb 2009 13:15:19 -0800</DateUpdated>
             <ParentCallSid/>
@@ -264,7 +264,7 @@ END
             </SubresourceUris>
         </Call>
         <Call>
-            <Sid>1002</Sid>  
+            <Sid>1002</Sid>
             <DateCreated>Sat, 07 Feb 2009 13:15:19 -0800</DateCreated>
             <DateUpdated>Sat, 07 Feb 2009 13:15:19 -0800</DateUpdated>
             <ParentCallSid/>
@@ -289,7 +289,7 @@ END
             </SubresourceUris>
         </Call>
         <Call>
-            <Sid>1003</Sid>  
+            <Sid>1003</Sid>
             <DateCreated>Sat, 07 Feb 2009 13:15:19 -0800</DateCreated>
             <DateUpdated>Sat, 07 Feb 2009 13:15:19 -0800</DateUpdated>
             <ParentCallSid/>
@@ -314,7 +314,7 @@ END
             </SubresourceUris>
         </Call>
         <Call>
-            <Sid>AVENDORIDAVENDORIDAVENDORID</Sid>  
+            <Sid>AVENDORIDAVENDORIDAVENDORID</Sid>
             <DateCreated>Sat, 07 Feb 2009 13:15:19 -0800</DateCreated>
             <DateUpdated>Sat, 07 Feb 2009 13:15:19 -0800</DateUpdated>
             <ParentCallSid/>
@@ -338,17 +338,17 @@ END
                 <Recordings>/2010-04-01/Accounts/AC5ef877a5fe4238be081ea6f3c44186f3/Calls/CA92d4405c9237c4ea04b56cbda88e128c/Recordings</Recordings>
             </SubresourceUris>
         </Call>
-    </Calls> 
-</TwilioResponse>  
+    </Calls>
+</TwilioResponse>
 END
   end
 
   def self.recent_calls
     <<END
-<TwilioResponse>  
-    <Calls page="0" numpages="1" pagesize="50" total="38" start="0" end="37">  
+<TwilioResponse>
+    <Calls page="0" numpages="1" pagesize="50" total="38" start="0" end="37">
         <Call>
-            <Sid>CA42ed11f93dc08b952027ffbc406d0868</Sid>  
+            <Sid>CA42ed11f93dc08b952027ffbc406d0868</Sid>
             <DateCreated>Sat, 07 Feb 2009 13:15:19 -0800</DateCreated>
             <DateUpdated>Sat, 07 Feb 2009 13:15:19 -0800</DateUpdated>
             <ParentCallSid/>
@@ -372,18 +372,18 @@ END
                 <Recordings>/2010-04-01/Accounts/AC5ef877a5fe4238be081ea6f3c44186f3/Calls/CA92d4405c9237c4ea04b56cbda88e128c/Recordings</Recordings>
             </SubresourceUris>
         </Call>
-    </Calls> 
-</TwilioResponse>  
+    </Calls>
+</TwilioResponse>
 END
   end
 
 
   def self.succeeded_recent_calls
     <<END
-<TwilioResponse>  
-    <Calls page="0" numpages="1" pagesize="50" total="38" start="0" end="37">  
+<TwilioResponse>
+    <Calls page="0" numpages="1" pagesize="50" total="38" start="0" end="37">
         <Call>
-            <Sid>CA42ed11f93dc08b952027ffbc406d0868</Sid>  
+            <Sid>CA42ed11f93dc08b952027ffbc406d0868</Sid>
             <DateCreated>Sat, 07 Feb 2009 13:15:19 -0800</DateCreated>
             <DateUpdated>Sat, 07 Feb 2009 13:15:19 -0800</DateUpdated>
             <ParentCallSid/>
@@ -407,17 +407,17 @@ END
                 <Recordings>/2010-04-01/Accounts/AC5ef877a5fe4238be081ea6f3c44186f3/Calls/CA92d4405c9237c4ea04b56cbda88e128c/Recordings</Recordings>
             </SubresourceUris>
         </Call>
-    </Calls> 
-</TwilioResponse>  
+    </Calls>
+</TwilioResponse>
 END
   end
 
   def self.no_calls
 <<END
-<TwilioResponse>  
-    <Calls page="0" numpages="1" pagesize="50" total="38" start="0" end="37">  
-    </Calls> 
-</TwilioResponse>  
+<TwilioResponse>
+    <Calls page="0" numpages="1" pagesize="50" total="38" start="0" end="37">
+    </Calls>
+</TwilioResponse>
 END
   end
 
@@ -425,10 +425,10 @@ END
 <<END
 <TwilioResponse>
     <IncomingPhoneNumber>
-        <Sid>PNe536dfda7c6184afab78d980cb8cdf43</Sid> 
+        <Sid>PNe536dfda7c6184afab78d980cb8cdf43</Sid>
         <AccountSid>AC755325d45d80675a4727a7a54e1b4ce4</AccountSid>
-        <FriendlyName>My Local Number</FriendlyName> 
-        <PhoneNumber>2064567890</PhoneNumber> 
+        <FriendlyName>My Local Number</FriendlyName>
+        <PhoneNumber>2064567890</PhoneNumber>
         <VoiceUrl>http://myapp.com/awesome</VoiceUrl>
         <VoiceMethod>POST</VoiceMethod>
         <VoiceFallbackUrl/>
@@ -457,12 +457,12 @@ END
 
   def self.toll_free_number_provision_success
 <<END
-<TwilioResponse> 
+<TwilioResponse>
     <IncomingPhoneNumber>
-        <Sid>PNe536dfda7c6184afab78d980cb8cdf43</Sid> 
-        <AccountSid>AC35542fc30a091bed0c1ed511e1d9935d</AccountSid> 
-        <FriendlyName>My Toll Free Number</FriendlyName> 
-        <PhoneNumber>8774567890</PhoneNumber> 
+        <Sid>PNe536dfda7c6184afab78d980cb8cdf43</Sid>
+        <AccountSid>AC35542fc30a091bed0c1ed511e1d9935d</AccountSid>
+        <FriendlyName>My Toll Free Number</FriendlyName>
+        <PhoneNumber>8774567890</PhoneNumber>
         <VoiceUrl>http://myapp.com/awesome</VoiceUrl>
         <VoiceMethod>POST</VoiceMethod>
         <VoiceFallbackUrl/>
@@ -485,7 +485,7 @@ END
         <ApiVersion>2010-04-01</ApiVersion>
         <Uri>/2010-04-01/Accounts/AC755325d45d80675a4727a7a54e1b4ce4/IncomingPhoneNumbers/PN2a0747eba6abf96b7e3c3ff0b4530f6e</Uri>
     </IncomingPhoneNumber>
-</TwilioResponse>   
+</TwilioResponse>
 END
   end
 

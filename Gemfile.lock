@@ -1,19 +1,19 @@
 PATH
   remote: .
   specs:
-    twilio_resource (0.2.0)
-      reactive_resource (~> 0.7.0)
+    twilio_resource (0.3.0)
+      reactive_resource (>= 0.7.0)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    activemodel (3.1.0)
-      activesupport (= 3.1.0)
+    activemodel (3.2.2)
+      activesupport (= 3.2.2)
       builder (~> 3.0.0)
-    activeresource (3.1.0)
-      activemodel (= 3.1.0)
-      activesupport (= 3.1.0)
-    activesupport (3.1.0)
+    activeresource (3.2.2)
+      activemodel (= 3.2.2)
+      activesupport (= 3.2.2)
+    activesupport (3.2.2)
       i18n (~> 0.6)
       multi_json (~> 1.0)
     builder (3.0.0)
